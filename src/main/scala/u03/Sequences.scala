@@ -84,15 +84,21 @@ object Sequences: // Essentially, generic linkedlists
          * E.g., [30, 20, 10] => 10
          * E.g., [10, 1, 30] => 1
          */
-        def min(s: Sequence[Int]): Optional[Int] =
+        /*def min(s: Sequence[Int]): Optional[Int] =
             def _min(s: Sequence[Int], n: Int): Int = s match
                 case Cons(h, t) if(h <= n) => _min(t, h)
                 case Cons(h, t) if(n < h) => _min(t, n)
                 case _ => n
-            
+                
             s match
                 case Nil() => Optional.Empty()
-                case _ => Optional.Just(_min(s, Int.MaxValue))
+                case _ => Optional.Just(_min(s, Int.MaxValue))*/
+                
+        def min(s: Sequence[Int]): Optional[Int] = s match
+            case Cons(h, Nil()) => Just(h)
+            case Cons(h, t) if h <= orElse(min(t), -1) => Just(h)
+            case Cons(h, t) if h > orElse(min(t), -1) => min(t)
+            case _ => Empty()
         
         /*
          * Get the elements at even indices
