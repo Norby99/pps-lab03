@@ -26,18 +26,12 @@ object Modules extends App:
             
             map(filter(sp)(f))(m)
         
-        def foldLeft[A](s: Sequence[A])(n: Int = 0)(op: (Int, A) => Int): Int = s match
+        def foldLeft[A, B](s: Sequence[A])(n: B = 0)(op: (B, A) => B): B= s match
             case Cons(h, t) => foldLeft(t)(op(n, h))(op)
             case _ => n
         
         def totalCoursesTaught(s: Sequence[Person]): Int =
-            val f = (p: Person) => p match
-                case Teacher(_, _) => true
-                case _ => false
-            
-            val t = filter(s)(f)
-            val courses = getCourseTeacher(t)
-            
+            val courses = getCourseTeacher(s)
             foldLeft(courses)(0)((acc, _) => acc + 1)
     
     println(Person.name(Person.Student("mario", 2015)))

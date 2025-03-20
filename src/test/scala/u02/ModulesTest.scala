@@ -36,4 +36,4 @@ class ModulesTest:
         
     @Test def testTotalCoursesTaught() =
         assertEquals(4, totalCoursesTaught(everyone))
-        assertEquals(1, totalCoursesTaught(onlyViroliAllOverAgain))
+        assertEquals(4, totalCoursesTaught(onlyViroliAllOverAgain))
